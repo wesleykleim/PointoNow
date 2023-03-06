@@ -12,7 +12,7 @@ Uma API para sistemas de pontos digitais.
         - Reconhecimento Facial
         - [mostrar detalhes](#detalhe-cadastro)
     - [Acesso](#acesso-funcionário)
-         - Login usu
+         - Login usuario
          - Senha
          - Esqueci a senha
          - Data e hora
