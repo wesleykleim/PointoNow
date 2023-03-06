@@ -2,8 +2,8 @@
 Uma API para sistemas de pontos digitais.
 
 ## Endpoints
-- Funcionários
-    - Cadastrar
+- Cadastrar 
+    - Funcionários
         - Nome 
         - CPF
         - Sexo
@@ -18,11 +18,11 @@ Uma API para sistemas de pontos digitais.
     - Identificação 
         - Localização GPS
         - Biometria 
-        - Reconhecimento Faical
+        - Reconhecimento Facial
         - Informar nome da empresa
     - Marcador de Ponto
         - Históriaco de pontos
-        - Pontão para validar o ponto 
+        - Bontão para validar o ponto 
     - Banco de Horas 
         - Debito de Horas
         - Crédito de horas
