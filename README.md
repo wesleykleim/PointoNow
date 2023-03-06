@@ -24,8 +24,9 @@ Uma API para sistemas de pontos digitais.
         - [mostrar detalhes](#detalhe-localização)
     - [Marcador de Ponto](#marcador-de-ponto)
         - Históriaco de pontos
-        - Bontão para validar o ponto 
+        - Botão para validar o ponto 
     - [Banco de Horas](#banco-de-horas)
+
         - Debito de Horas
         - Crédito de horas
         - Agendar Pagamento de Horas
