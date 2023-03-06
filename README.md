@@ -10,26 +10,27 @@ Uma API para sistemas de pontos digitais.
         - Cargo
         - Coletar biometria 
         - Reconhecimento Facial
-    - [mostrar detalhes](#detalhe-cadastro)
-    - Acesso 
-         - Login
+        - [mostrar detalhes](#detalhe-cadastro)
+    - [Acesso](#acesso-funcionário)
+         - Login usu
          - Senha
          - Esqueci a senha
          - Data e hora
-    - Identificação 
+    - [Rastreamento do funcionário](#localização-do-funcionário)
         - Localização GPS
         - Biometria 
         - Reconhecimento Facial
         - Informar nome da empresa
-    - Marcador de Ponto
+        - [mostrar detalhes](#detalhe-localização)
+    - [Marcador de Ponto](#marcador-de-ponto)
         - Históriaco de pontos
         - Bontão para validar o ponto 
-    - Banco de Horas 
+    - [Banco de Horas](#banco-de-horas)
         - Debito de Horas
         - Crédito de horas
         - Agendar Pagamento de Horas
         - Agendar compensação de Horas
----
+***
 ### Cadastrar Funcionários
 
 `POST` / pontonow/api/cadastrar
@@ -96,6 +97,192 @@ Uma API para sistemas de pontos digitais.
 |-|-
 | 200 | dados do funcionário retornados com sucesso
 | 400 | não exixte funcionário com o id informado
----
+***
+
+### Acesso Funcionário
+
+`POST` / pontonow/api/login
+
+| campo | tipo | obrigatório | descrição 
+|:-------:|:------:|:-------------:|:----------:
+| usuario | string | sim | campo para usuario se logar no app
+| senha | string | sim | campo para inserir a senha do usuário
+| esqueci a senha | string | sim | campo de redirecionámento para alteração de senha 
+| data e hora| date | sim | campo que exibe a data e a hora de aceeso ao app 
+
+**Exemplo de corpo de requisição**
+
+```js
+{
+    usuario: 'jorgerodrigo@gmail.com'
+    senha: '123#rodrigo'
+    esqueci_a_senha:'Informe uma nova senha'
+    data_hora: '06/03/2023 - 11:00h'
+    
+}
+```
+**Respostas**
+| código | descição
+|-|-
+| 201 | login efetuado com sucesso
+| 400 | usuário inválido
+
+***
+
+### Localização do funcionário
+
+`POST` / pontonow/api/localizacao
+
+| campo | tipo | obrigatório | descrição 
+|:-------:|:------:|:-------------:|:----------:
+| gps | Google Maps | sim | campo que identifica a localização do funcionário
+| Biometria  | Object | sim | campo para confirmação do funcionário
+| Reconhecimento Facial  | Object | sim | campo para confirmação do funcionário
+| nome da empresa| string | sim | identificação da organização onde coopera 
+
+**Exemplo de corpo de requisição**
+
+```js
+{
+    gps: 'Av. Lins de Vasconcelos, 1222 - Aclimação, São Paulo - SP, 01538-001'
+    biometria: API
+    reconhecimento_facial: API
+    nome_da_empresa: 'Faculdade de Informática e Administração Paulista'
+    
+}
+```
+**Respostas**
+| código | descição
+|-|-
+| 201 | login efetuado com sucesso
+| 400 | usuário inválido
+
+***
+### Detalhe Localização
+
+`GET` / pontonow/api/localizacao{id}
+
+**Exemplo de corpo de resposta**
+
+```js
+{
+    gps: {
+        rua: 'Av. Lins de Vasconcelos,'
+        cep: 'SP, 01538-001'
+        bairro:     'aclimação'
+        numero: '1222,'
+        UF: 'sp'
+    }
+   
+    biometria: API{
+        biometria_id: 1
+        nome: 'Jorge Rodrigo'
+    }
+    reconhecimento_facial: API{
+        reconhecimento_facial_id: 1
+        nome: 'Jorge Rodrigo'
+    }
+    nm_empresa:{
+        razao_social: 'faculdade de informática e administração paulista'
+        cnpj: '28.252.381/0001-15.'
+    }
+}
+```
+
+**Código de Respostas**
+| código | descição
+|-|-
+| 200 | dados de localização retornados com sucesso
+| 400 | não exixte esta localizaçãocom o id informado
+***
+### Marcador de ponto
+
+`POST` / pontonow/api/maracadorPonto
+
+| campo | tipo | obrigatório | descrição 
+|:-------:|:------:|:-------------:|:----------:
+| histórico_ponto | date | sim | campo que identifica as horas trabalhadas 
+| botão_ponto | Object | sim | marcador de ponto digital
 
 
+**Exemplo de corpo de requisição**
+
+```js
+{
+    historico_ponto: '06/08/2023'
+                     'entrada - 8:00' 
+                     'almoço  - 12:00 '
+                     'saida   - 17:00'
+
+                     '05/08/2023'
+                     'entrada - 8:00' 
+                     'almoço  - 12:00 '
+                     'saida   - 17:00'
+
+                     '04/08/2023'
+                     'entrada - 8:00' 
+                     'almoço  - 12:00 '
+                     'saida   - 17:00'
+
+                     '03/08/2023'
+                     'entrada - 8:00' 
+                     'almoço  - 12:00 '
+                     'saida   - 17:00'
+
+                     '02/08/2023'
+                     'entrada - 8:00' 
+                     'almoço  - 12:00 '
+                     'saida   - 17:00'
+
+                     '01/08/2023'
+                     'entrada - 8:00' 
+                     'almoço  - 12:00 '
+                     'saida   - 17:00'
+    botão: 'clique aqui para registrar seu ponto'
+    
+    
+}
+```
+**Respostas**
+| código | descição
+|-|-
+| 201 | ponto registrado com sucesso
+| 400 | não foi possivel registrar  
+
+***
+### Banco de Horas 
+
+`POST` / pontonow/api/bancoHoras
+
+| campo | tipo | obrigatório | descrição 
+|:-------:|:------:|:-------------:|:----------:
+| debito_horas | date | sim | campo onde o funcionário é informado quanto deve de horas
+| credito_horas | date | sim | campo onde o funcionário é informado quanto tem de horas positivas
+| agenda_pag_horas | date | sim | agendar dia que pagara as horas 
+| agendar_compensacao_horas| date | sim | agendar dia que poderá sair mais cedo ou entrar mais tarde no expediente 
+
+**Exemplo de corpo de requisição**
+
+```js
+{
+    debito_horas: '06/03/2023'
+                  'entrada: 9:00'
+                  'saida: 17:00'
+                  'horas negativas = 1 hora'
+
+    agendar_pagto_horas:'07/03/2023'
+
+    credito_horas:'07/03/2023'
+                  'entrada: 7:00'
+                  'saida: 19:00'
+                  'horas positivas = 2 hora'
+    
+    agendar_compensacao_horas: '08/03/2023 '
+    
+}
+```
+**Respostas**
+| código | descição
+|-|-
+| 201 | agendamento realizado com sucesso
+| 400 | data não disponivel 
