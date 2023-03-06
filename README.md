@@ -27,7 +27,7 @@ Uma API para sistemas de pontos digitais.
         - Botão para validar o ponto 
     - [Banco de Horas](#banco-de-horas)
 
-        - Debito de Horas
+        - Débito de Horas
         - Crédito de horas
         - Agendar Pagamento de Horas
         - Agendar compensação de Horas
