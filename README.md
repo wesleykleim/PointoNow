@@ -23,7 +23,7 @@ Uma API para sistemas de pontos digitais.
         - Informar nome da empresa
     - Marcador de Ponto
         - Históriaco de pontos
-        - Bontão para validar o ponto 
+        - Botão para validar o ponto 
     - Banco de Horas 
         - Debito de Horas
         - Crédito de horas
