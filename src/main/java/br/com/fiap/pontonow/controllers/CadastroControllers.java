@@ -12,7 +12,7 @@ public class CadastroControllers {
     @RequestMapping("/api/cadastro")
     @ResponseBody
     public Cadastro show(){
-         Cadastro cadastro = new Cadastro("Wesley Kleim", "42740502893");   
+        Cadastro cadastro = new Cadastro("Wesley Kleim ", "427.405.028.93", "Masculino", "Desenvolvedor Java");
          return cadastro; 
         
     }

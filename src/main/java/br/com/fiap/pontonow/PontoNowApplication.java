@@ -8,6 +8,10 @@ public class PontoNowApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PontoNowApplication.class, args);
+
+
+		
 	}
 
+	
 }
