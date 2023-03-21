@@ -1,9 +1,11 @@
+/* 
+
 package br.com.fiap.pontonow;
 import java.util.Scanner;
 public class CalculadoraDeHoras {
-    /**
+    
      * @param args
-     */
+    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -28,4 +30,4 @@ public class CalculadoraDeHoras {
     }
 }
 
-
+*/

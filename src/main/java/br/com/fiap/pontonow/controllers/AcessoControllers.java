@@ -1,23 +1,16 @@
 package br.com.fiap.pontonow.controllers;
 
 
-
-
-
-
-
-
-
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.fiap.pontonow.models.Acesso;
 
@@ -28,9 +21,10 @@ public class AcessoControllers {
     Logger log = LoggerFactory.getLogger(AcessoControllers.class);
    
 
-    @GetMapping("/api/acesso")
+    @RequestMapping("/api/acesso")
+    @ResponseBody
     public Acesso show(){
-        Acesso acesso = new Acesso("wesleykleimdev@gmail.com", "1@2#3$Wesley", "redefinir a Senha", LocalDate.now(), LocalTime.now());
+        Acesso acesso = new Acesso("Wesley Novais Kleim", "1@2#3#wesley", LocalDate.now());
         return acesso;
     }
 

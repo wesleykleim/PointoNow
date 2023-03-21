@@ -3,7 +3,7 @@ Uma API para sistemas de pontos digitais.
 
 ## Endpoints
 - Funcionários
-    - [Cadastrar](#cadastrar-funcionários)
+    - [Cadastra](#cadastrar-funcionários)
         - Nome 
         - CPF
         - Sexo
@@ -56,11 +56,11 @@ Uma API para sistemas de pontos digitais.
 ```js
 {
     nome: 'Jorge Rodrigo'
-    cpf: 123.456.78-90
-    sexo: 'masculino'
+    cpf: '123.456.78-90'
+    sexo: 'M'
     cargo: 'gerente_ti'
     biometria: API
-    reconhecimento_facial: API
+    reconhecimento_facial: object
 }
 ```
 **Respostas**
@@ -79,8 +79,8 @@ Uma API para sistemas de pontos digitais.
 ```js
 {
     nome: 'Jorge Rodrigo'
-    cpf: 123.456.78-90
-    sexo: 'masculino'
+    cpf: '123.456.78-90'
+    sexo: 'M'
     cargo: 'gerente_ti'
     biometria: API{
         biometria_id: 1
@@ -117,7 +117,6 @@ Uma API para sistemas de pontos digitais.
 {
     usuario: 'jorgerodrigo@gmail.com'
     senha: '123#rodrigo'
-    esqueci_a_senha:'Informe uma nova senha'
     data_hora: '06/03/2023 - 11:00h'
     
 }
@@ -146,8 +145,8 @@ Uma API para sistemas de pontos digitais.
 ```js
 {
     gps: 'Av. Lins de Vasconcelos, 1222 - Aclimação, São Paulo - SP, 01538-001'
-    biometria: API
-    reconhecimento_facial: API
+    biometria: object
+    reconhecimento_facial: object
     nome_da_empresa: 'Faculdade de Informática e Administração Paulista'
     
 }
@@ -175,11 +174,11 @@ Uma API para sistemas de pontos digitais.
         UF: 'sp'
     }
    
-    biometria: API{
+    biometria: object{
         biometria_id: 1
         nome: 'Jorge Rodrigo'
     }
-    reconhecimento_facial: API{
+    reconhecimento_facial: object{
         reconhecimento_facial_id: 1
         nome: 'Jorge Rodrigo'
     }
@@ -239,7 +238,7 @@ Uma API para sistemas de pontos digitais.
                      'entrada - 8:00' 
                      'almoço  - 12:00 '
                      'saida   - 17:00'
-    botão: 'clique aqui para registrar seu ponto'
+    botao: 'clique aqui para registrar seu ponto'
     
     
 }
