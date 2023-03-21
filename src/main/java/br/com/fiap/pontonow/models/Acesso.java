@@ -10,11 +10,11 @@ public class Acesso {
     private String esqueciSenha;
     private LocalDate data;
     private LocalTime hora;
-    public Acesso(String usuario, String senha, String esqueciSenha, int ano, int mes, int dia, LocalDate dataHorDate) {
+    public Acesso(String usuario, String senha, String esqueciSenha, LocalDate data, LocalTime hora) {
         this.usuario = usuario;
         this.senha = senha;
         this.esqueciSenha = esqueciSenha;
-        this.data = LocalDate.of(ano, mes, dia);
+        this.data = data;
         this.hora = LocalTime.now();
     }
     public String getUsuario() {
