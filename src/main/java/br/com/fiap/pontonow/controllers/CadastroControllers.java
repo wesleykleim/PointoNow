@@ -1,6 +1,6 @@
 package br.com.fiap.pontonow.controllers;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,34 +8,36 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.fiap.pontonow.models.Cadastro;
 import br.com.fiap.pontonow.repository.CadastroRepository;
 
 
 
-@Controller
+@RestController
+@RequestMapping("/api/cadastro")
 public class CadastroControllers {
     Logger log = LoggerFactory.getLogger(AcessoControllers.class);
-    List<Cadastro> cadastros = new ArrayList<>();
 
     @Autowired
     CadastroRepository repository;
 
     
-    @GetMapping("/api/cadastro")
+    @GetMapping
     public  List<Cadastro> index(){
          return repository.findAll(); 
         
     }
 
-    @PostMapping("/api/cadsatro")
+    @PostMapping
     public ResponseEntity <Cadastro> create(@RequestBody Cadastro cadastro){
         log.info("Acesso do usuario" + cadastro);
         repository.save(cadastro);
@@ -46,7 +48,7 @@ public class CadastroControllers {
      * @return
      */
 
-    @GetMapping(value="/api/cadastro/{id}")
+    @GetMapping(value="{id}")
     public ResponseEntity<Cadastro> show(@PathVariable Long id) {
         log.info("Buscando Cadastro com id " + id);
         var cadastroEncontrado = repository.findById(id);
@@ -63,7 +65,7 @@ public class CadastroControllers {
      * @param id
      * @return
      */
-    @DeleteMapping("/api/cadastro/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Cadastro> destroy(@PathVariable Long id){
         log.info("Apagando Cadastro com id " + id);
         var cadastroEncontrado = repository.findById(id);
@@ -78,7 +80,7 @@ public class CadastroControllers {
         
     }
 
-    @PutMapping("/api/cadastro/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<Cadastro> update(@PathVariable Long id, @RequestBody Cadastro cadastro){
 
         log.info("Atualizando cadastro com id " + id);
