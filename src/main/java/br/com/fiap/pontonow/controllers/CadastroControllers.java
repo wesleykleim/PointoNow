@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import br.com.fiap.pontonow.models.Cadastro;
 import br.com.fiap.pontonow.repository.CadastroRepository;
@@ -77,5 +78,20 @@ public class CadastroControllers {
         
     }
 
+    @PutMapping("/api/cadastro/{id}")
+    public ResponseEntity<Cadastro> update(@PathVariable Long id, @RequestBody Cadastro cadastro){
+
+        log.info("Atualizando cadastro com id " + id);
+        var cadastroEncontrado = repository.findById(id);
+
+        if (cadastroEncontrado.isEmpty())
+            return ResponseEntity.notFound().build();
+        
+        cadastro.setId(id);
+        repository.save(cadastro);
+
+        return ResponseEntity.ok(cadastro);
+
+    }
     
 }
