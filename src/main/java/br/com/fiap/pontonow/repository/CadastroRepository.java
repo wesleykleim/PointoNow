@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.fiap.pontonow.models.Cadastro;
 
 public interface CadastroRepository extends JpaRepository<Cadastro, Long>{
-    List<Cadastro>findByData(LocalDate data);
-    
+   /* List<Cadastro>findByData(LocalDate data);
+   */ 
 }
