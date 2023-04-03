@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.pontonow.models.Cadastro;
 import br.com.fiap.pontonow.repository.CadastroRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 
 
@@ -38,8 +40,9 @@ public class CadastroControllers {
     }
 
     @PostMapping
-    public ResponseEntity <Cadastro> create(@RequestBody Cadastro cadastro){
+    public ResponseEntity <Cadastro> create(@RequestBody @NotBlank Cadastro cadastro){
         log.info("Acesso do usuario" + cadastro);
+
         repository.save(cadastro);
         return ResponseEntity.status(HttpStatus.CREATED).body(cadastro);
     }

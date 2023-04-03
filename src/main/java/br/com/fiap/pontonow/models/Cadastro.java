@@ -6,6 +6,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import jakarta.validation.constraints.NotBlank;
+
+
+import jakarta.validation.constraints.Size;
+
 @Entity
 public class Cadastro {
     /**
@@ -13,11 +18,18 @@ public class Cadastro {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; 
 
-    private Long id;
-    private String nome;
+    @NotBlank @Size(min = 9, max = 11)
     private String cpf;
+
+    @NotBlank @Size(min = 20, max = 60)
+    private String nome;
+    
+    @NotBlank @Size(max = 1)
     private String sexo;
+
+    @NotBlank @Size(min = 20, max = 60)
     private String cargo;
 
     protected Cadastro(){
