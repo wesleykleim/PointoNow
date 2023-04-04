@@ -44,7 +44,7 @@ public class CadastroControllers {
 
     @PostMapping
     public ResponseEntity <Object> create(@RequestBody @Valid Cadastro cadastro, BindingResult result){
-        if(result.hasErrors()) return ResponseEntity.badRequest().body(new RestValidationErros("erro de validação"));
+       // if(result.hasErrors()) return ResponseEntity.badRequest().body(new RestValidationErros("erro de validação"));
         log.info("Acesso do usuario" + cadastro);
 
         repository.save(cadastro);
