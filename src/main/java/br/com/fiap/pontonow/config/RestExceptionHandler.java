@@ -3,8 +3,7 @@ package br.com.fiap.pontonow.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
-import org.hibernate.validator.internal.util.logging.LoggerFactory;
+
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
