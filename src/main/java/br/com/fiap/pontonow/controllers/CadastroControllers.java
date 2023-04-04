@@ -3,11 +3,14 @@ package br.com.fiap.pontonow.controllers;
 
 import java.util.List;
 
+import javax.naming.Binding;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import br.com.fiap.pontonow.models.RestValidationErros;
 import br.com.fiap.pontonow.models.Cadastro;
 import br.com.fiap.pontonow.repository.CadastroRepository;
 import jakarta.validation.Valid;
@@ -40,7 +43,8 @@ public class CadastroControllers {
     }
 
     @PostMapping
-    public ResponseEntity <Cadastro> create(@RequestBody @NotBlank Cadastro cadastro){
+    public ResponseEntity <Object> create(@RequestBody @Valid Cadastro cadastro, BindingResult result){
+        if(result.hasErrors()) return ResponseEntity.badRequest().body(new RestValidationErros("erro de validação"));
         log.info("Acesso do usuario" + cadastro);
 
         repository.save(cadastro);
@@ -84,7 +88,7 @@ public class CadastroControllers {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Cadastro> update(@PathVariable Long id, @RequestBody Cadastro cadastro){
+    public ResponseEntity<Cadastro> update(@PathVariable Long id, @RequestBody @Valid Cadastro cadastro){
 
         log.info("Atualizando cadastro com id " + id);
         var cadastroEncontrado = repository.findById(id);
