@@ -3,8 +3,6 @@ package br.com.fiap.pontonow.controllers;
 
 import java.util.List;
 
-import javax.naming.Binding;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +17,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.fiap.pontonow.models.RestValidationErros;
 import br.com.fiap.pontonow.models.Cadastro;
 import br.com.fiap.pontonow.repository.CadastroRepository;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
+
 
 
 
