@@ -1,6 +1,9 @@
 package br.com.fiap.pontonow.models;
 
 
+import java.util.List;
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,8 +13,12 @@ import jakarta.validation.constraints.NotBlank;
 
 
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 @Entity
+@Builder
+@AllArgsConstructor
 public class Cadastro {
     /**
      *
@@ -32,7 +39,7 @@ public class Cadastro {
     @NotBlank @Size(min = 20, max = 60)
     private String cargo;
 
-    protected Cadastro(){
+    public Cadastro(){
         
     }
     public Cadastro(String nome, String cpf, String sexo, String cargo) {
@@ -79,8 +86,15 @@ public class Cadastro {
     
   
     
-    
-    
+    /**
+     *
+     */
+    @jakarta.persistence.OneToOne
+    List<Acesso> acessos;
+
+    public static Object builder() {
+        return null;
+    }
  
 
     

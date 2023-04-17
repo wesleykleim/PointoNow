@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.pontonow.models.Acesso;
@@ -33,9 +34,20 @@ public class AcessoControllers {
     AcessoRepository repository;
 
     
+    /**
+     * @param nome
+     * @param tamanho
+     * @param pagina
+     * @return
+     */
     @GetMapping
-    public  List<Acesso> index(){
-         return repository.findAll(); 
+    public  List<Acesso> index(
+        @RequestParam(required = false) String nome, 
+        @RequestParam (defaultValue = "10") int tamanho,
+        @RequestParam(defaultValue = "0") int pagina
+    ) {
+        if (nome == null) return repository.listarTodasPaginado(tamanho, pagina*tamanho);
+         return repository.findByNomeContaining(nome); 
         
     }
 

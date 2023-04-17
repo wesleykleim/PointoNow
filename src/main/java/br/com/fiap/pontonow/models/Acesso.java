@@ -1,12 +1,12 @@
 package br.com.fiap.pontonow.models;
 
-import java.time.LocalDate;
+
 
 import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -21,6 +21,11 @@ import lombok.NoArgsConstructor;
 
 public class Acesso {
 
+    public Acesso(long l, String string, String string2) {
+    }
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,10 +37,7 @@ public class Acesso {
     private String senha;
 
 
-    private LocalDate data;
     
-
-    @ManyToOne
     private Cadastro cadastro;
 
    
