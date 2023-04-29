@@ -23,7 +23,6 @@ public class RestExceptionHandler {
         List<RestValidationErros> erros = new ArrayList<>();
         e.getFieldErrors().forEach(v -> erros.add(new RestValidationErros(v.getField(), v.getDefaultMessage())));
         return ResponseEntity.badRequest().body(erros);
-
     }
     
 }

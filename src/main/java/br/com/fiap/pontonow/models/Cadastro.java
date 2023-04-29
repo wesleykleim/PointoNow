@@ -4,6 +4,8 @@ package br.com.fiap.pontonow.models;
 import java.util.List;
 
 
+import org.springframework.hateoas.EntityModel;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +21,7 @@ import lombok.Builder;
 @Entity
 @Builder
 @AllArgsConstructor
-public class Cadastro {
+public class Cadastro extends EntityModel<Cadastro> {
     /**
      *
      */
@@ -95,7 +97,22 @@ public class Cadastro {
     public static Object builder() {
         return null;
     }
- 
+    public EntityModel<Cadastro> toEntityModel(){
+        return EntityModel.of(
+
+        cadastro,
+            linkTo(methodOn(CadastroControllers.class).show(id).withSelfRel(),
+            linkTo(methodOn(CadastroControllers.class).destroy(id).withSelfRel("delete"),
+            linkTo(methodOn(CadastroControllers.class).index(null, Pageable.unpaged())).withSelfRel("all"),
+            linkTo(methodOn(CadastroControllers.class).index(cadastro.getAcesso().getId())).withRel("acesso")
+           );
+    
+    
+            
+        )
+       
+    }
+  
 
     
     

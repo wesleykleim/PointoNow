@@ -6,6 +6,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -49,19 +53,20 @@ public class CadastroControllers {
     }
     /**
      * @param id
+     * @param cadastro 
      * @return
      */
 
     @GetMapping(value="{id}")
-    public ResponseEntity<Cadastro> show(@PathVariable Long id) {
+    public ResponseEntity<Cadastro> show(@PathVariable Long id, RepresentationModel<EntityModel<Cadastro>> cadastro) {
         log.info("Buscando Cadastro com id " + id);
         var cadastroEncontrado = repository.findById(id);
 
-        if(cadastroEncontrado.isEmpty())
 
-            return ResponseEntity.notFound().build();
+    
 
-        return ResponseEntity.ok(cadastroEncontrado.get());
+
+        return cadastro.toEtityModel();
 
     }
 
