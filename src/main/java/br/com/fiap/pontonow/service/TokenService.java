@@ -7,6 +7,12 @@ import jakarta.validation.Valid;
 
 @Service
 public class TokenService{
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    String secret;
+
     public Token generateToken(@Valid Credencial credencial){
         Algorithm alg  = Algorithm. HMAC256(null)
         String token = JWT.create()
@@ -18,5 +24,18 @@ public class TokenService{
 
         return mew Token(token, "JWT", "Bearer");
 
+    }
+
+    public Usuario Get ValidateUser(String token){
+        Algorithm alg = Algorithm.HMAC256("pontonow");
+        var email = JWT.require(alg)
+                    .withIssuer("PontoNow")
+                    .build()
+                    .verify(token)
+                    getSubject()
+                    ;
+
+        return usuarioRepository.findByEamil(email)
+                    .orElseThrow(() -> new JWTVerificationException("Usuario Invalido")); 
     }
 }
