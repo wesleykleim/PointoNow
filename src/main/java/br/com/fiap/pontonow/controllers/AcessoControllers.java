@@ -50,6 +50,8 @@ public class AcessoControllers {
          return repository.findByNomeContaining(nome); 
         
     }
+    @Autowired 
+    TokenService tokenService;
 
     @PostMapping
     public ResponseEntity <Acesso> create(@RequestBody @Valid Acesso acesso){
@@ -79,29 +81,22 @@ public class AcessoControllers {
      * @param id
      * @return
      */
-    @DeleteMapping("{id}")
-    public ResponseEntity<Acesso> destroy(@PathVariable Long id){
-        log.info("Apagando cadastro com id " + id);
-        repository.delete((Acesso) getAcesso(id));
+    @DeleteMapping("/api/resgisdtra")
+    publicx ResponseEntity<Usuario> resgistrar(@RequestBody @Valid Usuario usuario){
+        usuario.setSenha(encode(usuario.getSenha()));
+        repository.save(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
 
-        return ResponseEntity.noContent().build();
-        
     }
+    
 
-    @PutMapping("{id}")
-    public ResponseEntity<Acesso> update(@PathVariable Long id, @RequestBody @Valid Acesso cadastro){
+    @PutMapping("/api/login")
+    public ResponseEntity<Object> login(@RequestBody @Valiod Credencial credencial){
+        manager.authenticate(credencial.toAuthentication());
 
-        log.info("Atualizando acesso com id " + id);
-        var cadastroEncontrado = repository.findById(id);
-
-        if (cadastroEncontrado.isEmpty())
-            return ResponseEntity.notFound().build();
+        var token = tokenService.genereteToken(credencial);
+        return ResponseEntity.ok(token);
         
-        cadastro.setId(id);
-        repository.save(cadastro);
-
-        return ResponseEntity.ok(cadastro);
-
     }
     
 }
