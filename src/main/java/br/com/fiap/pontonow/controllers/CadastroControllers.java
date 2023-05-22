@@ -44,6 +44,10 @@ public class CadastroControllers {
     }
 
     @PostMapping
+    @ApiResponses(
+        @ApiRespponse(responseCode = "201", description = "Despesa cadastrada com sucesso")
+        @ApiResponses(responseCode = "400", description = "Dados invalidos,a validação falhou")
+    )
     public ResponseEntity <Object> create(@RequestBody @Valid Cadastro cadastro, BindingResult result){
        // if(result.hasErrors()) return ResponseEntity.badRequest().body(new RestValidationErros("erro de validação"));
         log.info("Acesso do usuario" + cadastro);
@@ -58,6 +62,10 @@ public class CadastroControllers {
      */
 
     @GetMapping(value="{id}")
+    @Operation(
+        sumary = "Detalhe dos cadastros",
+        description = " Retorna os dados de uma despesa passada pelo parâmetro de path id"
+    )
     public ResponseEntity<Cadastro> show(@PathVariable Long id, RepresentationModel<EntityModel<Cadastro>> cadastro) {
         log.info("Buscando Cadastro com id " + id);
         var cadastroEncontrado = repository.findById(id);

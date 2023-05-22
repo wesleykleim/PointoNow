@@ -26,6 +26,7 @@ import jakarta.validation.Valid;
 
 
 @RestController
+@Tag("auth")
 @RequestMapping("/api/acesso")
 public class AcessoControllers {
     Logger log = LoggerFactory.getLogger(getClass());
