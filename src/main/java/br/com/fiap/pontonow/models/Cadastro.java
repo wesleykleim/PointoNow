@@ -29,16 +29,16 @@ public class Cadastro extends EntityModel<Cadastro> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
 
-    @NotBlank @Size(min = 9, max = 11)
+    @NotBlanck(message = "O CPF é obrigatório")
     private String cpf;
 
-    @NotBlank @Size(min = 20, max = 60)
+    @NotBlanck(message = "O nome é obrigatório")
     private String nome;
     
     @NotBlank @Size(max = 1)
     private String sexo;
 
-    @NotBlank @Size(min = 20, max = 60)
+    @NotBlanck(message = "O cargo obrigatório")
     private String cargo;
 
     public Cadastro(){
