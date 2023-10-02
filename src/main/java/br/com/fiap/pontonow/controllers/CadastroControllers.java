@@ -7,13 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +20,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.fiap.pontonow.models.Usuario;
 import br.com.fiap.pontonow.models.Cadastro;
 import br.com.fiap.pontonow.repository.CadastroRepository;
+import br.com.fiap.pontonow.service.ContaService;
 import jakarta.validation.Valid;
 
 
@@ -47,20 +49,14 @@ public class CadastroControllers {
         
     }
 
-    @PostMapping
-
-    public ResponseEntity <Cadastro> create(@RequestBody @Valid Cadastro cadastro){
-       // if(result.hasErrors()) return ResponseEntity.badRequest().body(new RestValidationErros("erro de validação"));
-        log.info("Acesso do usuario" + cadastro);
-
+   @PostMapping
+    public ResponseEntity<Cadastro> create(@RequestBody @Valid Conta cadastro) {
+        log.info("cadastrando conta: " + cadastro);
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        conta.setUsuario((Usuario) auth.getPrincipal());
         repository.save(cadastro);
         return ResponseEntity.status(HttpStatus.CREATED).body(cadastro);
-    }
-    /**
-     * @param id
-     * @param cadastro 
-     * @return
-     */
+   
 
     @GetMapping(value="{id}")
 

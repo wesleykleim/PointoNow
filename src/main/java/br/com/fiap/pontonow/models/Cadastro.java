@@ -1,119 +1,38 @@
-package br.com.fiap.pontonow.models;
-
-
+import java.math.BigDecimal;
 import java.util.List;
-
-
-import org.springframework.hateoas.EntityModel;
-
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-
-
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-
-@Entity
-@Builder
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+@Data
+@EqualsAndHashCode(of = "id")
+@NoArgsConstructor
 @AllArgsConstructor
-public class Cadastro extends EntityModel<Cadastro> {
-    /**
-     *
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
-
-    @NotBlanck(message = "O CPF é obrigatório")
-    private String cpf;
-
-    @NotBlanck(message = "O nome é obrigatório")
+@Entity
+public class Conta {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank(message = "O nome é obrigatório")
     private String nome;
-    
-    @NotBlank @Size(max = 1)
-    private String sexo;
 
-    @NotBlanck(message = "O cargo obrigatório")
-    private String cargo;
+    @Min(value=0, message = "Não pode conter simbolos")
+    private BigDecimal saldoInicial;
 
-    public Cadastro(){
-        
-    }
-    public Cadastro(String nome, String cpf, String sexo, String cargo) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.sexo = sexo;
-        this.cargo = cargo;
-    }
-    public Long getId(){
-        return id;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public String getCpf() {
-        return cpf;
-    }
-    public String getSexo() {
-        return sexo;
-    }
-    public String getCargo() {
-        return cargo;
-    }
+    private String icone;   
 
-    public void setId(Long id){
-        this.id = id;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-    @Override
-    public String toString() {
-        return "Cadastro [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", sexo=" + sexo + ", cargo=" + cargo + "]";
-    }
-    
-  
-    
-    /**
-     *
-     */
-    @jakarta.persistence.OneToOne
-    List<Acesso> acessos;
 
-    public static Object builder() {
-        return null;
-    }
-    public EntityModel<Cadastro> toEntityModel(){
-        return EntityModel.of(
-
-        cadastro,
-            linkTo(methodOn(CadastroControllers.class).show(id).withSelfRel(),
-            linkTo(methodOn(CadastroControllers.class).destroy(id).withSelfRel("delete"),
-            linkTo(methodOn(CadastroControllers.class).index(null, Pageable.unpaged())).withSelfRel("all"),
-            linkTo(methodOn(CadastroControllers.class).index(cadastro.getAcesso().getId())).withRel("acesso")
-           );
-    
-    
-            
-        )
-       
-    }
-  
-
-    
-    
+    @ManyToOne
+    private Usuario usuario;
 }

@@ -1,35 +1,42 @@
-package br.com.fiap.pontonow.config;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import br.com.fiap.pontonow.models.Acesso;
-import br.com.fiap.pontonow.models.Cadastro;
-import br.com.fiap.pontonow.repository.CadastroRepository;
+import br.com.fiap.meujulius.models.Conta;
+import br.com.fiap.meujulius.models.Despesa;
+import br.com.fiap.meujulius.models.Usuario;
+import br.com.fiap.meujulius.repository.ContaRepository;
+import br.com.fiap.meujulius.repository.DespesaRepository;
+import br.com.fiap.meujulius.repository.UsuarioRepository;
 
-@Configuration
+import java.util.List;
+
+@@-25,11+28,24 @@
+
 public class DatabaseSeeder implements CommandLineRunner {
+    @Autowired
+    DespesaRepository despesaRepository;
 
     @Autowired
-    AcessoRepository acessoRepository;
+    UsuarioRepository usuarioRepository;
 
     @Autowired
-    CadastroRepository cadastroRepository;
+    PasswordEncoder encoder;
 
     @Override
-    public void run(String... args) throws Exception {
-        
-            Acesso a1 = new Acesso(1L, "wesleykleim@gmail.com","123@#W" );
-            Acesso a2 = new Acesso(2L, "jorgerodrigo@gmail.com","666@#Jr" );
-             acessoRepository.saveAll(List.of(a1,a2));
+     public void run(String... args) throws Exception {
 
-        cadastroRepository.saveAll(List.of(
-            Cadastro.builder().cpf("427405028").nome("Wesley kleim").cargo("Desenvolvedor Java").acesso(a1).build()));
-    }
-    
+    contaRepository.saveAll(List.of(c1,c2,c3));
 
-    
-}
+    despesaRepository.saveAll(List.of(
+         Usuario u1 = new Usuario(1L, "Wesley", "joao@fiap.com.br", encoder.encode("123456"));
+        Usuario u2 = new Usuario(2L, "Rodrigo", "maria@fiap.com.br", encoder.encode("123456"));
+
+        usuarioRepository.save(u1);
+        usuarioRepository.save(u2);
+
+      
+
+    ))}}
